@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="U2_Topicos_Actividad_1.Views.EpisodiosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:U2_Topicos_Actividad_1.Views" xmlns:viewmodels="clr-namespace:U2_Topicos_Actividad_1.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GuiaViewModel}"
+             mc:Ignorable="d" x:Name="ucEpisodiosView"
+             d:DesignHeight="450" d:DesignWidth="800" Background="#E8E8E8" BorderBrush="Black" BorderThickness="3">
+    <UserControl.Resources>
+        <ContextMenu x:Key="menuEpisodios">
+            <MenuItem Header="Editar" Command="{Binding Source={x:Reference ucEpisodiosView}, Path=DataContext.CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Ventanas.EditarEpisodio}"></MenuItem>
+            <MenuItem Header="Eliminar" Command="{Binding Source={x:Reference ucEpisodiosView}, Path=DataContext.CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Ventanas.EliminarEpisodio}"></MenuItem>
+        </ContextMenu>
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <DockPanel Background="Black">
+            <Border DockPanel.Dock="Top">
+                <Border.Background>
+                    <ImageBrush Opacity="0.1" Stretch="UniformToFill" AlignmentY="Bottom" ImageSource="https://canvas-bridge.tubitv.com/BFCEzW1JqTuoRg0y6UuUwFknfsA=/1747x444:1747x444/1920x1080/smart/img.adrise.tv/c50072b8-111e-4099-8481-7a73929756d0.jpg"></ImageBrush>
+                </Border.Background>
+                <DockPanel Background="Transparent" DockPanel.Dock="Top">
+                    <Image DockPanel.Dock="Left" Source="https://imgsrv.crunchyroll.com/cdn-cgi/image/format=auto,width=480,height=720,fit=contain,quality=85/catalog/crunchyroll/697c8b5ff2f49a97348b5507c06e1183.jpe" Stretch="Uniform" Height="230"></Image>
+                    <StackPanel Margin="0,100,0,0" DockPanel.Dock="Right">
+                        <TextBlock DockPanel.Dock="Top" Margin="15,0,0,0" TextAlignment="Left" FontFamily="Arial" FontSize="40" Foreground="#BDBDBD">Death Note / T<Run Text="{Binding Temporada.Numero}"></Run></TextBlock>
+                        <TextBlock DockPanel.Dock="Bottom" Margin="15,0,0,0" TextAlignment="Left" FontFamily="Arial" FontSize="55" Foreground="White" Height="70">Lista de episodios</TextBlock>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <DockPanel>
+                <StackPanel Background="#101111" DockPanel.Dock="Top" Margin="0,0,0,0">
+                    <DockPanel>
+                        <WrapPanel>
+                            <Button Background="#BDBDBD" HorizontalAlignment="Right" Height="30" Width="50" BorderBrush="Gray" BorderThickness="1.5" Command="{Binding VerTemporadasCommand}">
+                                <Image Margin="2" Source="https://cdn.pixabay.com/photo/2020/03/22/15/19/arrow-4957487_960_720.png" Stretch="Uniform"></Image>
+                            </Button>
+                        </WrapPanel>
+                        <DockPanel>
+                            <Button Margin="0,0,0,0" Background="#BDBDBD" HorizontalAlignment="Right" Height="30" Width="50" BorderBrush="Gray" BorderThickness="1.5" Command="{Binding OrdenarEpisodiosDescendenteCommand}">
+                                <Image Margin="2" Source="https://cdn.icon-icons.com/icons2/2385/PNG/512/sort_descending_icon_144112.png" Stretch="Uniform"></Image>
+                            </Button>
+                            <Button Background="#BDBDBD" HorizontalAlignment="Right" Height="30" Width="50" BorderBrush="Gray" BorderThickness="1.5" Command="{Binding OrdenarEpisodiosAscendenteCommand}">
+                                <Image Margin="2" Source="https://cdn.icon-icons.com/icons2/2385/PNG/512/sort_ascending_icon_144114.png" Stretch="Uniform"></Image>
+                            </Button>
+                            <TextBox Width="200" Padding="6" Margin="0,0,0,0" FontSize="14" FontFamily="Arial" TextAlignment="Left" Text="{Binding BusquedaEpisodio}"></TextBox>
+                            <Button Background="#BDBDBD" HorizontalAlignment="Right" Height="30" Width="50" BorderBrush="Gray" BorderThickness="1.5" Command="{Binding BuscarEpisodioCommand}">
+                                <Image Margin="2" Source="https://cdn-icons-png.flaticon.com/512/64/64673.png" Stretch="Uniform"></Image>
+                            </Button>
+                        </DockPanel>
+                        <Button Background="#BDBDBD" HorizontalAlignment="Right" Height="30" Width="50" BorderBrush="Gray" BorderThickness="1.5" Command="{Binding CambiarVistaCommand}" CommandParameter="{x:Static viewmodels:Ventanas.AgregarEpisodio}">
+                            <Image Source="https://static.thenounproject.com/png/6155-200.png" Stretch="Uniform"></Image>
+                        </Button>
+                    </DockPanel>
+                </StackPanel>
+                <ListBox HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled" DockPanel.Dock="Bottom" Background="#E8E8E8" ItemsSource="{Binding ListaEpisodios}" SelectedItem="{Binding Episodio}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:EpisodioView ContextMenu="{StaticResource menuEpisodios}"></local:EpisodioView>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </DockPanel>
+    </ScrollViewer>
+</UserControl>

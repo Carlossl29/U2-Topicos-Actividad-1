@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="U2_Topicos_Actividad_1.Views.TemporadaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:U2_Topicos_Actividad_1.Views" xmlns:viewmodels="clr-namespace:U2_Topicos_Actividad_1.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:GuiaViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="#00000000">
+    <StackPanel>
+        <Border BorderBrush="#6587B2" BorderThickness="0,0,0,1.5" Margin="0,2,0,0">
+            <DockPanel>
+                <Border Height="150" DockPanel.Dock="Left" Width="100" BorderBrush="#101111" BorderThickness="1.5" Margin="0,0,0,5">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Imagen}"></ImageBrush>
+                    </Border.Background>
+                </Border>
+                <StackPanel Margin="10" HorizontalAlignment="Left">
+                <TextBlock FontSize="25" FontFamily="Arial" FontWeight="Bold">Temporada <Run Text="{Binding Numero}"></Run></TextBlock>
+                    <TextBlock Margin="5,5,0,0" FontSize="15" FontFamily="Arial" Foreground="DimGray" Text="{Binding FechaLanzamiento, StringFormat='{}{0:dddd, d MMMM yyyy}'}"></TextBlock>
+                    <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14" TextAlignment="Justify" FontFamily="Arial" Text="{Binding Descripcion}"></TextBlock>
+            </StackPanel>
+            </DockPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
